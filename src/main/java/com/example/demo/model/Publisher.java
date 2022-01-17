@@ -1,10 +1,8 @@
 package com.example.demo.model;
 
-
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -13,23 +11,21 @@ import java.util.Set;
 @AllArgsConstructor
 @ToString
 @Entity
-public class Author {
+public class Publisher {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @EqualsAndHashCode.Include
     private Long id;
-    private String firstName;
-    private String lastName;
+    private String name;
+    private String address;
 
-    @ManyToMany(mappedBy = "authors")
+    @OneToMany
+    @Transient
     private Set<Book> books;
 
-
-    public Author(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        books = new HashSet<>();
+    public Publisher(String name, String address) {
+        this.name = name;
+        this.address = address;
     }
-
 }
